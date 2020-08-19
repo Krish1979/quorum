@@ -24,6 +24,34 @@ Privacy Metadata Trie is a parallel trie that stores the privacy metadata (and w
 
 Each contract(account) that is created as 'PP' or 'PSV' would have such a structure created and attached to private state trie as it is essential in performing checks on future transactions affection those contracts.
 
+## Configuration Changes
+
+### Quorum
+
+Genesis.json file is modified to include `privacyEnhancementsBlock`. The values for this should be set to an appropriate value in future (and should be initialised with same value across all the nodes in the network) by when the entire network would be ready to transact with privacy enhanced contracts. 
+
+### Tessera
+
+New flag `enableEnhancedPrivacy` has been added to Tessera config defaulting to `FALSE`, and can be enabled by adding the property to the config file the same way as other features. Refer sample configuration for further details.
+
+## Enabling Privacy enhancement in Quorum Network 
+
+For any given node privacy manager(Tessera) is started first and for that reason we allow Tessera node to be upgraded with privacy enhancement support ahead of Quorum upgrade. But when Quorum node is upgraded and geth reinitialised with `privacyEnhancementsBlock`, Quorum node will validate the version of Tessera running and will fail to start if Tessera is not running upgraded version. Quorum node will throw appropriate error message in the console suggesting users to upgrade Tessera first.
+
+If a node wants to upgrade it's Tessera to privacy enhancement release (or further) to avail other features and fixes but not ready to upgrade Quorum, it can do so by not enabling `enableEnhancedPrivacy` in Tessera config. This will allow the node to reject PP and PSV transactions from other nodes until the node is ready to support privacy enhanced contracts.
+
+## Backward compatability
+
+### Quorum
+
+An upgraded Quorum node can coexist on a network where other nodes are running on lower version of Quorum and thus supports node by node upgrade. But it cannot support privacy enhanced contracts until all interested nodes are upgraded and privacy 'enabled'. If a upgraded but privacy not 'enabled' node receives a PSV or PP transaction the node would log a `BAD BLOCK` error with “Privacy enhanced transaction received while privacy enhancements are disabled. Please check your node configuration.” error message. If the consensus algorithm is raft, the node would stop. For Istanbul, the node would keep trying to append the problematic block and reprint the above errors and it wont catch up with rest of nodes until restarted after upgrade.
+
+### Tessera 
+
+On any given node, Tessera can be upgraded to privacy enhanced release anytime but care must be taken as when to enable `enableEnhancedPrivacy` flag in Tessera config as once the flag is enabled, it will accept PSV and PP transactions and can cause the node to crash if Quorum node is not privacy enabled. The upgraded node can continue to communicate on Tessera nodes running on previous versions using `standard` private transactions. 
+
+## Tessera P2P communication changes
+
 
 
 
