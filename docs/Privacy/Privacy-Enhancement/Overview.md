@@ -48,9 +48,26 @@ An upgraded Quorum node can coexist on a network where other nodes are running o
 
 ### Tessera 
 
-On any given node, Tessera can be upgraded to privacy enhanced release anytime but care must be taken as when to enable `enableEnhancedPrivacy` flag in Tessera config as once the flag is enabled, it will accept PSV and PP transactions and can cause the node to crash if Quorum node is not privacy enabled. The upgraded node can continue to communicate on Tessera nodes running on previous versions using `standard` private transactions. 
+On any given node, Tessera can be upgraded to privacy enhanced release anytime but care must be taken as when to enable `enableEnhancedPrivacy` flag in Tessera config as once the flag is enabled, it will accept PSV and PP transactions and can cause the node to crash if Quorum node is not privacy enabled. The upgraded node can continue to communicate on Tessera nodes running on previous versions using `standard` private transactions. API versioning(add hyperlink later) to be introdued along with privacy enhancement enables the upgraded node to determine if the receiving node support privacy enhancement or not and fail the transaction then and there. 
 
 ## Tessera P2P communication changes
+
+Refer [here](http://docs.goquorum.com/en/latest/Privacy/Lifecycle-of-a-private-transaction/) to refresh about Tessera P2P communication.
+
+### Party Protection changes
+
+To prevent non-party node from interacting with PP contracts new transactions must be submitted with ACOTH and `PrivacyFlag` from Quorum to Tessera. Tessera node would then generate a secure hashes (hash using new transaction ciphertext, original transaction ciphertext and original transaction master key) for ACOTH and include a) `PrivacyFlag`, b) ACOTH and c) ACOTH Securehash in the transaction payload shared betweek Tessera nodes.
+
+### Private State Validation changes
+
+Besides the ACOTH, a PSV transaction has an execution hash (merkle root) calculated from all the affected contract(s) resulting from the transaction simulation(at the time of submission) included from Quorum to Tessera. The d) execution hash and e) list of participants are also shared between Tessera nodes.
+
+## Privacy Enhanced Transaction End to End Flow
+
+Refer [here](http://docs.goquorum.com/en/latest/Privacy/Lifecycle-of-a-private-transaction/) for end to end flow of 'standard' private transaction.
+
+
+
 
 
 
