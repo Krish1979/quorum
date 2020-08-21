@@ -8,13 +8,13 @@ This implementation doesn't allow non-party interaction on a private contract bu
 
 ## Private State Validation (PSV)
 
-This implementation further prevents nodes from state deviation by failing private transactions to 'self' or 'subset of nodes' by sharing the list of recipients among all nodes which is validated against all subsequent transactions (default mode only sending node knows the list of recipients). 
+This implementation further prevents nodes from state deviation by failing private transactions to 'self' or 'subset of nodes' by sharing the list of recipients among all nodes which is validated against all subsequent transactions (in standard default mode only sending node knows the list of recipients). 
 
 ## Key Enhancements
 
 ### Privacy Flag
 
-A new additional parameter `PrivacyFlag` in all Quorum `send` API methods , being passed from the client to enable new privacy enhancements. This flag is an unsigned integer with the following values: 1 for PP transaction and 3 for PSV transaction. If the flag is missing or zero, the transaction is assumed to be a 'non-privacy enhanced' standard transaction. 
+A new additional parameter `PrivacyFlag` in all Quorum [send](http://docs.goquorum.com/en/latest/Getting%20Started/api/) API methods , being passed from the client to enable privacy enhancement feature. This flag is an unsigned integer with the following values: 1 for PP and 3 for PSV transaction. If the flag is missing or zero, the transaction is assumed to be a 'non-privacy enhanced' standard transaction. 
 
 ### Privacy Metadata and Privacy Metadata Trie
 
