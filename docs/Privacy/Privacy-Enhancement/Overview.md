@@ -66,9 +66,9 @@ Besides the ACOTH, a PSV transaction has an execution hash (merkle root) calcula
 
 Refer [here](http://docs.goquorum.com/en/latest/Privacy/Lifecycle-of-a-private-transaction/) for end to end flow of 'standard' private transaction.
 
+![](Privacy_Enhancement.png)
 
-
-
+In this example we walk through the flow of a private transaction on a 'privacy enhanced contract' between Nodes A & B.
 
 
 
