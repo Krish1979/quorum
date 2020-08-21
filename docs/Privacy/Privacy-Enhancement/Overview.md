@@ -70,5 +70,32 @@ Refer [here](http://docs.goquorum.com/en/latest/Privacy/Lifecycle-of-a-private-t
 
 In this example we walk through the flow of a private transaction on a 'privacy enhanced contract' between Nodes A & B.
 
+1. User pushing a private transaction from Node A private for Node B
+
+    - The transaction payload will include the `PrivacyFlag` with value `1` for PP and `3` for PSV contract
+
+2. Node A reading the `PrivacyFlag` will run EVM simulation to get all affected contracts and the ACOTH(s) associated to contract account. For PSV transactions, it calculates an execution hash (merkle root) from all the affected contracts resulting from the transaction simulation.
+
+3. Node A pushes the transaction payload, `PrivacyFlag`, ACOTH (& the merkle root for `PSV`) to Node A Tessera.
+
+4. Node A Tessera would then generate secure hashes for ACOTH and use them to validate that the originating party has access to all relevant transactions. In addition for `PSV` it would also verify participants list against the list in the ACOTH transaction (as in `PSV` contract the recipient list is shared across all nodes party to the contract). If the list doesn't match it will return failure on `/send` to Node A Quorum.
+
+5. Node A Tessera pushes to Node B Tessera encrypted payload, ACOTH <-> Securehash mapping (for `PSV` transaction it will further push `privateFor` list and merkle root).
+
+6. Node B Tessera will compute and compare secure hash from Node A Tessera (for `PSV` it will also verify paricipant list of ACOTH against `privateFor` list). 
+
+7. Node B Tessera will return SUCCESS to Node A Tessera always even if the compute and compare mismatched (to prevent Node A snipping out recipient of a contract) but it will not store the payload/ACOTH<->Securehash mapping based on the outcome.
+
+8. Node A Tessera returns hash for the encrytped transaction payload to Node A Quorum
+
+9. Node A mines the transaction across the network.
+
+10. Node A & Node B being party to the contract will `/receive` decrypted payload, ACOTH (for `PSV` also merkle root) from respective Tessera Nodes.
+
+11. Both Nodes execute the transaction and compare the ACOTH (and execution has for `PSV`) and update the transaction receipt accordingly to mark transaction execution completion..
+
+
+
+
 
 
