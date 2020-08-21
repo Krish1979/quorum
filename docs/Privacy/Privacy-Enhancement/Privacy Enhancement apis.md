@@ -12,15 +12,11 @@ The api to query the Privacy Metadata for a contract account address
 #### Examples
 
 ```jshelllanguage tab="JSON RPC"
-// Request
-curl -X POST http://127.0.0.1:22001 --data '{"jsonrpc":"2.0","method":"getContractPrivacyMetadata","params":["0x1349f3e1b8d71effb47b840594ff27da7e603d17"],"id":15}' --header "Content-Type: application/json"
+   // Request
+   curl -X POST http://127.0.0.1:22000 --data '{"jsonrpc":"2.0","method":"eth_getContractPrivacyMetadata","params":      ["0x1932c48b2bf8102ba33b4a6b545c32236e342f34"],"id":15}' --header "Content-Type: application/json"
 
-// Response
-{"jsonrpc":"2.0","id":10,"result":"0xceffe8051d098920ac84e33b8a05c48180ed9b26581a6a06ce9874a1bf1502bd"}
-```
+   // Response
+   {"jsonrpc":"2.0","id":15,"result":{"creationTxHash":   [246,124,116,139,190,217,33,16,203,102,81,13,65,58,249,145,68,180,67,79,163,37,119,27,99,35,247,240,12,53,25,45,47,134,16,118,246,128,97,237,45,50,79,97,78,221,47,1 89,11,165,238,36,8,187,66,64,42,135,108,75,41,85,152,183],"privacyFlag":3}}
+   ```
 
-```javascript tab="geth console"
-> quorumExtension.extendContract("0x9aff347f193ca4560276c3322193224dcdbbe578", "BULeR8JyUWhiuuCMU/HLA0Q5pzkYT+cHII3ZKBey3Bo=", "0xed9d02e382b34818e88b88a309c7fe71e65f419d",{from: "0xca843569e3427144cead5e4d5999a3d0ccf92b8e", privateFor:["BULeR8JyUWhiuuCMU/HLA0Q5pzkYT+cHII3ZKBey3Bo="]})
 
-"0x9e0101dd215281b33989b3ae093147e9009353bb63f531490409a628c6e87310"
-```
