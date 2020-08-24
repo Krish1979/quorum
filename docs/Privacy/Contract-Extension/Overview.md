@@ -33,6 +33,12 @@ In this example private contract is being extended from Nodes A to Node B.
     - **5a** - Upon noticing the state share event as a part of block processing, node B fetches the contract private state data from Tessera of node B
     - **5b** - Node B applies the fetched state to the contract address and becomes party of the private contract
     
+## Contract Extension for Privacy Enhanced contracts
+
+Please refer here for overiew of privacy enhanced contracts. 
+
+ACOTH which is the key validator in private 
+
 
 ## Note
 If the network is running with [Enhanced network permissioning](http://docs.goquorum.com/en/latest/Permissioning/Enhanced%20Permissions%20Model/Overview/), then:
