@@ -35,7 +35,7 @@ In this example private contract is being extended from Nodes A to Node B.
     
 ## Contract Extension for Privacy Enhanced contracts
 
-Please refer here for overiew of privacy enhanced contracts. 
+Please refer [here](../Privacy-Enhancements/Overview.md) for overiew of privacy enhanced contracts. 
 
 ACOTH which is the key validator in private 
 
