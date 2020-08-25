@@ -73,7 +73,7 @@ The data recovery procedure works by invoking a "resend request" to each new nod
 
 The target node will not send back transactions as a response the request in order to ensure that a malicious node cannot get access to the transactions. i.e. anyone can send a request for a particular key, but it will mean that the node that holds that key will receive the transactions, not the node making the request. In normal usage, the node making the request and the node holding the public key are the same.
 
-## Data recovery (Enhanced from *** release onwards)
+## Data recovery (Enhanced from `Privacy Enhancement` release onwards)
 
 Due to the interdependence between Party Protection and PSV transactions (the existence and validation of ACOTHs), transactions cannot just be accepted but need to be recovered in the appropriate manner so that they don’t get wrongly rejected.
 
@@ -87,7 +87,11 @@ The recovery process will include these steps:
  
 Tessera recovery process will stop and shutdown once the above steps are executed. Each stage result will be reported as SUCCESS(0), PARTIAL_SUCCESS(1), or FAILURE(2). The result code would be useful for scripting purpose (i.e. Automatically start Tessera in normal mode if recovery successfully completed)
 
-To trigger the recovery process, Tessera will need to be started in recovery mode by using the command line (tessera -r or tessera --recover). During the recovery process, Tessera won’t accept any new enhanced-privacy transactions.
+To trigger the recovery process, Tessera will need to be started in recovery mode by using the command line 
+
+    ````tessera -r or tessera --recover 
+    
+ During the recovery process, Tessera won’t accept any new enhanced-privacy transactions but will continue to accept 'standard' private transactions.
 
 
 
